@@ -22,12 +22,12 @@ Check out the live application here: [pass-op-react-password-manager.vercel.app]
 
 ## 📦 Installation
 
-1. **Clone the repository:**
+1.**Clone the repository:**
 ```
 git clone https://github.com/RishabhJ-26/PassOP-React-Password-Manager.git
 ```
    
-2. **Navigate to the project directory:**
+2.**Navigate to the project directory:**
 
 ```
 cd PassOP-React-Password-Manager
