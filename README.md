@@ -1,7 +1,5 @@
 # PassOP - React Password Manager
 
----
-
 A modern, secure, and open-source password manager built with React.  
 Easily store, manage, and retrieve your passwords with an intuitive UI.
 
@@ -25,9 +23,9 @@ Check out the live application here: [pass-op-react-password-manager.vercel.app]
 ## 📦 Installation
 
 1. **Clone the repository:**
-   ```
-   git clone https://github.com/RishabhJ-26/PassOP-React-Password-Manager.git
-   ```
+```
+git clone https://github.com/RishabhJ-26/PassOP-React-Password-Manager.git
+```
    
 2. **Navigate to the project directory:**
 
@@ -45,7 +43,7 @@ npm install
 npm start
 ```
 The application will run on http://localhost:3000.
----
+
 
 **📁 Project Structure**
 
@@ -59,16 +57,16 @@ PassOP-React-Password-Manager/
 ├── package.json
 └── README.md
 
----
+
 
 🧾 License
 This project is licensed under the MIT License.
 
----
+
 
 🙌 Acknowledgements
 Thanks to all the contributors and the open-source community for their invaluable resources and support.Created and maintained by Rishabh Jain.
----
+
 
 
 
