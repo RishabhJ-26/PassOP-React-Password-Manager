@@ -10,7 +10,7 @@ const Footer = () => {
 
 
             </div>
-            <div className='flex justify-center items-center'> Created with <img className='w-7 mx-2' src="icons/heart.png" alt="" /> by Rishabh Jain </div>
+            <div className='flex justify-center items-center'> Created with{' '}<img className='w-7 mx-2' src="icons/heart.png" alt="" />{' '}<span className='mr-1'>by</span><a className='text-blue-400 ml-1' target='_blank' href="https://www.linkedin.com/in/rishabh-jain-enris">Rishabh Jain</a> </div>
         </div>
     )
 }
