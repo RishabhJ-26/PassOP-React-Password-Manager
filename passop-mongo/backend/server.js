@@ -1,54 +1,57 @@
-const express = require('express')
-const dotenv = require('dotenv')
+const express = require('express');
+const dotenv = require('dotenv');
 const { MongoClient } = require('mongodb'); 
-const bodyparser = require('body-parser')
-const cors = require('cors')
+const bodyparser = require('body-parser');
+const cors = require('cors');
 
-dotenv.config()
+// Load environment variables from .env file
+dotenv.config();
 
-
-// Connecting to the MongoDB Client
-const url = process.env.MONGO_URI;
+// MongoDB connection
+const url = process.env.MONGO_URI; // MongoDB URI from environment variable
 const client = new MongoClient(url);
 client.connect();
 
-// App & Database
-const dbName = process.env.DB_NAME 
-const app = express()
-const port = 3000 
+// Database name from environment variables
+const dbName = process.env.DB_NAME;
+
+// Create an Express app
+const app = express();
+
+// Use dynamic port for production (Render) and fallback to 3000 for local development
+const port = process.env.PORT || 3000;
 
 // Middleware
-app.use(bodyparser.json())
-app.use(cors())
+app.use(bodyparser.json());
+app.use(cors());
 
-
-// Get all the passwords
+// Route to get all passwords
 app.get('/', async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('passwords');
     const findResult = await collection.find({}).toArray();
-    res.json(findResult)
-})
+    res.json(findResult);
+});
 
-// Save a password
+// Route to save a password
 app.post('/', async (req, res) => { 
-    const password = req.body
+    const password = req.body;
     const db = client.db(dbName);
     const collection = db.collection('passwords');
     const findResult = await collection.insertOne(password);
-    res.send({success: true, result: findResult})    
-})
+    res.send({success: true, result: findResult});    
+});
 
-// Delete a password by id
+// Route to delete a password by id
 app.delete('/', async (req, res) => { 
-    const password = req.body
+    const password = req.body;
     const db = client.db(dbName);
     const collection = db.collection('passwords');
     const findResult = await collection.deleteOne(password);
-    res.send({success: true, result: findResult})
-})
+    res.send({success: true, result: findResult});
+});
 
-
+// Start the server on the dynamic port
 app.listen(port, () => {
-    console.log(`Example app listening on  http://localhost:${port}`)
-}) 
+    console.log(`App listening on ${process.env.PORT ? 'https://passop-react-password-manager.onrender.com' : `http://localhost:${port}`}`);
+});
