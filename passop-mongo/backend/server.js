@@ -7,6 +7,7 @@ const cors = require('cors');
 // Load environment variables from .env file
 dotenv.config();
 
+
 // MongoDB connection
 const url = process.env.MONGO_URI; // MongoDB URI from environment variable
 const client = new MongoClient(url);
@@ -21,13 +22,17 @@ const app = express();
 // Use dynamic port for production (Render) and fallback to 3000 for local development
 const port = process.env.PORT || 3000;
 
+const corsOptions = {
+  origin: 'https://pass-op-react-password-manager-ngee.vercel.app',
+  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+};
+
+// ✅ Apply CORS middleware before everything else
+app.use(cors(corsOptions));
 // Middleware
 app.use(bodyparser.json());
-app.use(cors({
-  origin: 'https://pass-op-react-password-manager-ngee.vercel.app',
-  credentials: true // only if you're using cookies, else remove this line
-}));
-
 
 // Route to get all passwords
 app.get('/', async (req, res) => {
