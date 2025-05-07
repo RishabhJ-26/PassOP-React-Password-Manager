@@ -23,7 +23,11 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyparser.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://pass-op-react-password-manager-ngee.vercel.app',
+  credentials: true // only if you're using cookies, else remove this line
+}));
+
 
 // Route to get all passwords
 app.get('/', async (req, res) => {
