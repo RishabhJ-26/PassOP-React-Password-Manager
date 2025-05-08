@@ -50,33 +50,47 @@ const Manager = () => {
 
     }
 
-    const savePassword = async () => {
-        if (form.site.length > 3 && form.username.length > 3 && form.password.length > 3) {
+  const savePassword = async () => {
+    if (form.site.length > 3 && form.username.length > 3 && form.password.length > 3) {
 
-            // If any such id exists in the db, delete it 
-            await fetch("https://passop-react-password-manager.onrender.com/", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: form.id }) })
+        const newId = uuidv4();
 
-            setPasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-            await fetch("https://passop-react-password-manager.onrender.com/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, id: uuidv4() }) })
+        // If any such id exists in the db, delete it 
+        await fetch("https://passop-react-password-manager.onrender.com/", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: form.id })
+        })
 
-            // Otherwise clear the form and show toast
-            setform({ site: "", username: "", password: "" })
-            toast('Password saved!', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "dark",
-            });
-        }
-        else {
-            toast('Error: Password not saved!');
-        }
+        const newEntry = { ...form, id: newId }
 
+        // Save to local state
+        setPasswordArray([...passwordArray, newEntry]);
+
+        // Save to backend
+        await fetch("https://passop-react-password-manager.onrender.com/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEntry)
+        })
+
+        // Clear form and show toast
+        setform({ site: "", username: "", password: "" });
+        toast('Password saved!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    } else {
+        toast('Error: Password not saved!');
     }
+}
+
 
     const deletePassword = async (id) => {
         console.log("Deleting password with id ", id)
