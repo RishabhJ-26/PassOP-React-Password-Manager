@@ -11,7 +11,7 @@ const Manager = () => {
     const [passwordArray, setPasswordArray] = useState([])
 
     const getPasswords = async () => {
-        let req = await fetch("http://localhost:3000/")
+        let req = await fetch("https://passop-react-password-manager.onrender.com/")
         let passwords = await req.json()
         setPasswordArray(passwords)
     }
